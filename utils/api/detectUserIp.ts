@@ -1,4 +1,4 @@
-export const getUserIpAddress = async () => {
+export const getUserIpAddress = async (): Promise<string | null> => {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_GET_IP}`);
     const data = await response.json();

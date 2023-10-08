@@ -1,4 +1,8 @@
-export const fetchWeatherData = async (city: string | undefined) => {
+import { IFetchWeatherDataFunction } from "@/types/api/api.types";
+
+export const fetchWeatherData: IFetchWeatherDataFunction = async (
+  city: string | undefined
+) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_OWM_API}?q=${city}&appid=${process.env.NEXT_PUBLIC_OWM_KEY}&units=metric`
   );
@@ -7,3 +11,4 @@ export const fetchWeatherData = async (city: string | undefined) => {
   console.log(data);
   return data;
 };
+

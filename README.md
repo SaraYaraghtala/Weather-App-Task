@@ -1,6 +1,6 @@
 # Weather Web App
 
-![Weather App Screenshot](screenshot.png)
+![Weather App Screenshot](screenshot.JPG)
 
 ## Table of Contents
 

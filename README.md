@@ -5,7 +5,6 @@
 ## Table of Contents
 
 - [Description](#description)
-- [Demo](#demo)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Requirements](#requirements)
@@ -16,7 +15,7 @@
 
 ## Description
 
-The Weather Web App is a simple and responsive web application that provides users with current weather information for selected cities. It uses the OpenWeather API to retrieve weather data and the IP Stack API to detect the user's location.
+The Weather Web App is a responsive web application that provides users with current weather information for selected cities. It uses the OpenWeather API to retrieve weather data and the IP Stack API to detect the user's location.
 
 ### Features
 
@@ -26,15 +25,11 @@ The Weather Web App is a simple and responsive web application that provides use
 
 - **Data Refresh:** Users can easily refresh the page to obtain the latest weather data for the selected city.
 
-## Demo
-
-[Live Demo](https://your-weather-app-url.com)
 
 ## Technologies Used
 
 - **React.js with Next.js:** For server-side rendering and building the user interface.
 - **TypeScript:** For type-safe and reliable development.
-- **Axios:** For making API requests to OpenWeather and IP Stack.
 - **Tailwind CSS:** For responsive and adaptive styling.
 - **OpenWeatherMap API:** To retrieve weather information.
 - **IP Stack API:** To detect the user's location. [IP Stack Documentation](https://ipstack.com/documentation)
@@ -43,10 +38,9 @@ The Weather Web App is a simple and responsive web application that provides use
 
 To contribute to or run this project locally, ensure that you have the following:
 
-- Axios (or "fetch") for API calls.
+- fetch.
 - Style libraries for creating a responsive design.
 - TypeScript for type safety.
-- A well-structured codebase.
 - Storage for data about the selected city.
 - Next.js for server-rendered React applications.
 - IP Stack API for location detection.

@@ -1,13 +1,24 @@
-import React, { FC, useEffect, useState } from "react";
 import { getUserIpAddress } from "@/utils/api/detectUserIp";
-import { ImLocation2 } from "react-icons/im";
 import { fetchWeatherData } from "@/utils/api/getCurrentWeather";
+import React, { FC, useEffect, useState } from "react";
+import { FiRefreshCw } from "react-icons/fi";
+import { ImLocation2 } from "react-icons/im";
 
 const Widget: FC = () => {
   const [location, setLocation] = useState<string | null>(null);
   const [weatherData, setWeatherData] = useState<any>(undefined);
-  
+  const [selectedCity, setSelectedCity] = useState<string>("");
 
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedValue = e.target.value;
+    setSelectedCity(selectedValue);
+  };
+
+  const handleSearchClick = async () => {
+    if (selectedCity) {
+      await getWeather(selectedCity);
+    }
+  };
 
   const getWeather = async (cityName: string | null) => {
     if (cityName === null) {
@@ -49,29 +60,61 @@ const Widget: FC = () => {
         console.error("Error getting user IP address:", error);
       });
   }, []);
+
   return (
-    <div className="bg-custom-background-image bg-cover   w-[90%] h-[90%] m-[5%] absolute rounded-2xl">
-      <div className="flex flex-row items-center justify-center ">
-        <ImLocation2 className="inline-block mr-2 " />
-        <p className="text-athens-gray-950 text-xl ">
-          {location ? location : "Loading..."}
-        </p>
-      </div>
-      {weatherData && (
+    <div className="bg-custom-background-image bg-cover  w-[90%] h-[90%] m-[5%] absolute rounded-2xl ">
+      <div>
         <div>
-          <h2 className="text-xl font-semibold">
-            {weatherData.name}, {weatherData.sys.country}
-          </h2>
-          <p>Temperature: {weatherData.main.temp} °C</p>
-          <p>Weather: {weatherData.weather[0].main}</p>
-          <p>Pressure: {weatherData.main.pressure} hPa</p>
-          <p>Wind Speed: {weatherData.wind.speed} m/s</p>
-          <p>Feels Like: {weatherData.main.feels_like} °C</p>
-          <p>Humidity: {weatherData.main.humidity}%</p>
+          <div>
+            <select onChange={handleSelectChange} onClick={handleSearchClick}>
+              <option>{location ? location : "Select city"}</option>
+              <option>Amsterdam</option>
+              <option>New York</option>
+              <option>Moscow</option>
+              <option>London</option>
+            </select>
+          </div>
         </div>
-      )}
+
+        {weatherData && (
+          <div>
+            <h2>{weatherData.name}</h2>
+            <div>
+              <img
+                src={`${process.env.NEXT_PUBLIC_OWM_IMAGE_API}${
+                  weatherData?.weather[0]?.icon || ""
+                }.png`}
+                alt="weather icon"
+              />
+              <div>
+                <p>{weatherData?.main?.temp} °C</p>
+                <p>{weatherData?.weather[0]?.main || ""}</p>
+              </div>
+            </div>
+            <div>
+              <div>
+                <p>Feels Like: {weatherData?.main?.feels_like}°C</p>
+              </div>
+              <div>
+                <p>Humidity: {weatherData?.main?.humidity}%</p>
+              </div>
+              <div>
+                <p>Pressure: {weatherData?.main?.pressure}hPa</p>
+              </div>
+              <div>
+                <p>Wind: {weatherData?.wind?.speed}m/s</p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+      <div>
+        <div>
+          <ImLocation2 />
+          <p>{location ? location : "Loading..."}</p>
+        </div>
+      </div>
     </div>
-    
   );
 };
 
